@@ -1,0 +1,9 @@
+{
+  "name": "xeno1-mini-crm",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
+

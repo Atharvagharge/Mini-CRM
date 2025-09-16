@@ -1,11 +1,13 @@
 // backend/seed.js
-
 const mongoose = require("mongoose");
-const Customer = require("./src/models/Customer"); // <-- adjust path if different
+const dotenv = require("dotenv");
+const Customer = require("./src/models/Customer"); // adjust path if needed
+
+dotenv.config(); // loads MONGO_URI from .env
 
 async function seed() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/mini-crm");
+    await mongoose.connect(process.env.MONGO_URI); // 🔑 connect to Atlas
 
     // Clear old customers
     await Customer.deleteMany({});
@@ -34,7 +36,7 @@ async function seed() {
       { name: "Tina", email: "tina@example.com", totalSpend: 890, visits: 3, lastOrderDate: new Date("2024-12-05") },
     ]);
 
-    console.log("✅ Seeded 20 sample customers");
+    console.log("✅ Seeded 20 sample customers into Atlas");
     process.exit(0);
   } catch (err) {
     console.error("❌ Error seeding customers:", err);
@@ -43,4 +45,5 @@ async function seed() {
 }
 
 seed();
+
 

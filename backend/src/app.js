@@ -75,4 +75,9 @@ app.use('/vendor', vendorRoutes);
 
 app.get('/', (req,res) => res.json({ok: true, message: 'Mini CRM backend'}));
 
-app.listen(PORT, ()=> console.log(`Server running on ${PORT}`));
+// Only start the server in non-serverless environments
+if (require.main === module) {
+  app.listen(PORT, ()=> console.log(`Server running on ${PORT}`));
+}
+
+module.exports = app;
